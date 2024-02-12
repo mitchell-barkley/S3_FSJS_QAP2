@@ -40,11 +40,11 @@ const server = http.createServer((request, response) => {
             routes.productsPage(path, response);
             console.log('Products Page');
             break;
-        case '/services':
-            path += 'services.html';
+        case '/technews':
+            path += 'technews.html';
             myEmitter.emit('route', path);
-            routes.servicesPage(path, response);
-            console.log('Services Page');
+            routes.technewsPage(path, response);
+            console.log('Tech News Page');
             break;
         case '/subscribe':
             path += 'subscribe.html';

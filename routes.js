@@ -9,7 +9,7 @@ function productsPage(path, response) {
     myEmitter.emit('route', path);
     fetchFile(path, response);
 }
-function servicesPage(path, response) {
+function technewsPage(path, response) {
     myEmitter.emit('route', path);
     fetchFile(path, response);
 }
@@ -56,7 +56,7 @@ function fetchFile(fileName, response) {
 module.exports = {
     indexPage,
     productsPage,
-    servicesPage,
+    technewsPage,
     subscribePage,
     aboutPage,
     contactPage,
