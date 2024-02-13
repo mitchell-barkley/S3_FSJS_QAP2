@@ -37,27 +37,24 @@
     </p>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-            fetch('https://hacker-news.firebaseio.com/v0/topstories.json')
-                .then(response => response.json())
-                .then(data => {
-                    // Get the IDs of the top stories
-                    const topStoryIds = data.slice(0, 10); // Fetch top 10 stories
-
-                    // Fetch details of each story
-                    Promise.all(topStoryIds.map(storyId => fetch(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`)))
-                        .then(responses => Promise.all(responses.map(response => response.json())))
-                        .then(stories => {
-                            const newsList = document.getElementById('news-list');
-                            stories.forEach(story => {
-                                const listItem = document.createElement('li');
-                                listItem.innerHTML = `<a href="${story.url}" target="_blank">${story.title}</a>`;
-                                newsList.appendChild(listItem);
-                            });
-                        })
-                        .catch(error => console.error('Error fetching stories:', error));
+        fetch('https://hacker-news.firebaseio.com/v0/topstories.json')
+            .then(response => response.json())
+            .then(data => {
+                const topStoryIds = data.slice(0, 10);
+                Promise.all(topStoryIds.map(storyId => fetch(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`)))
+                .then(responses => Promise.all(responses.map(response => response.json())))
+                .then(stories => {
+                    const newsList = document.getElementById('news-list');
+                    stories.forEach(story => {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `<a href="${story.url}" target="_blank">${story.title}</a>`;
+                        newsList.appendChild(listItem);
+                    });
                 })
-                .catch(error => console.error('Error fetching top story IDs:', error));
-        });
+                .catch(error => console.error('Error fetching stories:', error));
+            })
+            .catch(error => console.error('Error fetching top story IDs:', error));
+    });
 </script>
 </body>
 </html>
