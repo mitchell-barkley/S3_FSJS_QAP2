@@ -27,15 +27,7 @@ myEmitter.on("route", async (url) => {
         );
     } catch (err) {
         console.log(err);
-}
-
-    // fs.appendFile(
-    //     path.join(__dirname, "logs", "route.log"),
-    //     `Route Event on: ${url} at ${d}\n`,
-    //     (err) => {
-    //         if (err) throw err;
-    //     }
-    // );
+    }
 });
 
 myEmitter.on("error", async (message) => {
@@ -57,18 +49,6 @@ myEmitter.on("error", async (message) => {
     } catch (err) {
         console.log(err);
     }
-
-    // if (DEBUG) console.log(`Error: ${message} at ${d}`);
-    // if (!fs.existsSync(path.join(__dirname, "logs"))) {
-    //     fs.mkdirSync(path.join(__dirname, "logs"));
-    // }
-    // fs.appendFile(
-    //     path.join(__dirname, "logs", "error.log"),
-    //     `Error: ${message} at ${d}\n`,
-    //     (err) => {
-    //         if (err) throw err;
-    //     }
-    // );
 });
 
 myEmitter.on("event", async (event, level, message) => {
@@ -78,22 +58,6 @@ myEmitter.on("event", async (event, level, message) => {
     const month = format(currentDate, "MM");
     const day = format(currentDate, "dd");
     const logFolder = path.join(__dirname, "logs", year, month, day);
-
-    // try {
-    //     const currFolder = "logs/" + getYear(new Date());
-    //     if (!fs.existsSync(path.join(__dirname, "logs/"))) {
-    //         await fsPromises.mkdir(path.join(__dirname, "logs/"));
-    //         if (!fs.existsSync(path.join(__dirname, currFolder))) {
-    //             await fsPromises.mkdir(path.join(__dirname, currFolder));
-    //         }
-    //     } else {
-    //         if (!fs.existsSync(path.join(__dirname, currFolder))) {
-    //             await fsPromises.mkdir(path.join(__dirname, currFolder));
-    //         }
-    //     }
-    // } catch (err) {
-    //     console.log(err);
-    // }
 
     try {
         await fsPromises.mkdir(logFolder, { recursive: true });
